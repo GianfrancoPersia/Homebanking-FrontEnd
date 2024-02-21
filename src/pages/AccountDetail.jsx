@@ -1,20 +1,19 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 const AccountDetail = () => {
     const [account, setAccount] = useState([])
-    const [transaction, setTrasactions] = useState([])
-
+    const params = useParams()
 
     useEffect(() => {
-        axios("http://localhost:8080/api/accounts/2")
+        axios("http://localhost:8080/api/clients/1")
             .then(res => {
-                setAccount(res.data)
-                setTrasactions(res.data.transactions)
+                let accounts = res.data.accounts.find(account => account.id == params.id)
+                setAccount(accounts)
             })
             .catch(err => console.log(err))
     }, [])
-
 
     return (
         <main className=' bg-blue-900 flex py-10 gap-10 justify-center min-h-dvh'>
@@ -27,9 +26,9 @@ const AccountDetail = () => {
                     </div>
 
                     <div className='flex flex-col gap-5'>
-                        <span>{account.number}</span>
-                        <span className='text-[24px] font-semibold'>{account.balance?.toLocaleString('en-US',{style:'currency', currency:'USD'})}</span>
-                        <span>{account.creationDate}</span>
+                        <span>{account?.number}</span>
+                        <span className='text-[24px] font-semibold'>{account?.balance?.toLocaleString('en-US',{style:'currency', currency:'USD'})}</span>
+                        <span>{account?.creationDate}</span>
                     </div>
                 </div>
             </article>
@@ -45,7 +44,7 @@ const AccountDetail = () => {
                     </tr>
                 </thead>
                 <tbody className='text-white flex flex-col justify-center'>
-                    {transaction.map(transaction => (
+                    {account?.transactions?.map(transaction => (
                         <tr key={transaction.id} className='flex py-4 text-center'>
                             <td className='w-[15%]'>{transaction.type}</td>
                             <td className='w-[15%]'>{transaction.amount.toLocaleString('en-US',{style:'currency', currency:'USD'})}</td>

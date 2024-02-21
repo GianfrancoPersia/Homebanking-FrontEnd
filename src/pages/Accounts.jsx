@@ -46,7 +46,7 @@ const Accounts = (props) => {
 	})
 
 	useEffect(() => {
-		axios("http://localhost:8080/api/clients/2")
+		axios("http://localhost:8080/api/clients/1")
 			.then(res => {
 				setAccount(res.data.accounts)
 				setClient(res.data)

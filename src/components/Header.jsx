@@ -9,9 +9,9 @@ import {faRightFromBracket} from '@fortawesome/free-solid-svg-icons'
 const Header = () => {
   return (
     <header className='flex'>
-      <nav className='flex items-center w-full'>
+      <nav className='flex items-center flex-wrap'>
         <img src={logotipo} alt="logo" className='w-[150px] h-[80px]'/>
-        <div className='flex gap-16 grow justify-center'>
+        <div className='flex md:gap-16 gap-2 grow justify-center flex-wrap' >
           {/* traigo los links dinamicos */}
           {
             LINKS_HEADER.map((link)=>{
