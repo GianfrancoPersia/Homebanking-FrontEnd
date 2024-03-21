@@ -49,7 +49,7 @@ const Login = () => {
 
                     <p className='text-red-600 text-lg'>{errorLogin}</p>
 
-                    <Link to={"/register"} className='text-white'>Don't have an account? <span className='font-semibold text-lg text-yellow-400 hover:border-b-2 border-yellow-400'> REGISTER</span></Link>
+                    <Link to={"/register"} className='text-white'>Don't have an account? <span className='font-semibold text-lg text-blue-500 hover:border-b-2 border-blue-500'> REGISTER</span></Link>
 
                     <button className='bg-blue-800 w-[150px] p-4 text-xl text-white rounded-3xl'>Login</button>
                 </form>
