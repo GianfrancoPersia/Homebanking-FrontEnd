@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import {useDispatch} from 'react-redux'
 import authActions from '../redux/actions/auth.actions'
+import Swal from 'sweetalert';
 
 const Cards = () => {
 
@@ -52,18 +53,22 @@ const Cards = () => {
 				Authorization: "Bearer " + localStorage.getItem("token")
 			}})
 			.then(response => {
-				console.log(response.data)
-				resetForm()
-				axios.get("/api/clients/current",
-				{ headers: {
-					Authorization: "Bearer " + localStorage.getItem("token")
-				}})
-				.then(res => {
-					dispatch(current(res.data))
-					console.log(res.data)
-					console.log(user)
-				})
-				.catch(err => console.log(err))
+				console.log(response.data);
+				Swal({
+					title: 'Successful application!',
+					icon: 'success',
+					button: 'Accept'
+				}).then(() => {
+					axios.get("/api/clients/current", {
+						headers: {
+							Authorization: "Bearer " + localStorage.getItem("token")
+						}
+					})
+					.then(res => {
+						dispatch(current(res.data));
+					})
+					.catch(err => console.log(err));
+				});
 			})
 			.catch(err => console.log(err))
 		}

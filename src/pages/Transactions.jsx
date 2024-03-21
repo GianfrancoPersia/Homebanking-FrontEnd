@@ -3,6 +3,8 @@ import axios from 'axios'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
 import authActions from '../redux/actions/auth.actions'
+import Swal from 'sweetalert';
+
 
 const Transactions = () => {
 
@@ -66,18 +68,23 @@ const Transactions = () => {
                     }
                 })
                 .then(response => {
-                    console.log(response.data)
-                    // resetForm()
-                    axios.get("/api/clients/current", {
-                        headers: {
-                            Authorization: "Bearer " + localStorage.getItem("token")
-                        }
-                    })
-                        .then(res => {
-                            dispatch(current(res.data))
-
+                    console.log(response.data);
+                    Swal({
+                        title: 'Successful transaction!',
+                        icon: 'success',
+                        button: 'Accept'
+                    }).then(() => {
+                        axios.get("/api/clients/current", {
+                            headers: {
+                                Authorization: "Bearer " + localStorage.getItem("token")
+                            }
                         })
-                        .catch(err => console.log(err))
+                        .then(res => {
+                            dispatch(current(res.data));
+                        })
+                        .catch(err => console.log(err));
+                    });
+                                
                 })
                 .catch(err => {
                     console.log(err.response.data)
@@ -105,7 +112,7 @@ const Transactions = () => {
 
     console.log(newTransaction)
     return (
-        <main className=' bg-blue-900 flex flex-col items-center py-8'>
+        <main className=' bg-blue-900 flex flex-col items-center py-8 min-h-dvh'>
             <article className='w-full flex flex-col items-center'>
                 <h1 className='bg-blue-900 w-full text-2xl text-center text-white font-semibold pb-6'></h1>
 
