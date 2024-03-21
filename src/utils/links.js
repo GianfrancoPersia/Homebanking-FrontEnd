@@ -1,6 +1,6 @@
 export const LINKS_HEADER = [
     {
-        href:"/",
+        href:"/accounts",
         name:"Accounts"
     },
     {
@@ -14,5 +14,13 @@ export const LINKS_HEADER = [
     {
         href:"/trasactions",
         name:"Transactions"
-    }
+    },
+    // {
+    //     href:"/",
+    //     name:"home"
+    // },
+    // {
+    //     href:"/register",
+    //     name:"register"
+    // }
 ]

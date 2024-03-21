@@ -1,13 +1,33 @@
+// import React from 'react'
+// import ReactDOM from 'react-dom/client'
+// import App from './App.jsx'
+// import './index.css'
+// import 'tailwindcss/tailwind.css';
+// import './utils/axios.config.js'
+// import store from './redux/store.js';
+// import { Provider } from 'react-redux'
+
+
+// ReactDOM.createRoot(document.getElementById('root')).render(
+//   <React.StrictMode>
+//     <Provider store={store}>
+//       <App/>
+//     </Provider>
+//   </React.StrictMode>,
+// )
+
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import 'tailwindcss/tailwind.css';
-import Header from './components/Header.jsx';
-
+import './utils/axios.config.js'
+import { Provider } from 'react-redux'
+import store from './redux/store.js'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App/>
+      <Provider store={store}>
+        <App />
+      </Provider>
   </React.StrictMode>,
 )

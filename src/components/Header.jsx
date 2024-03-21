@@ -1,26 +1,27 @@
 import React from 'react'
 import logotipo from "../../public/img/PayNow_logotipo.png"
+import logoMobile from "../../public/img/PayNow_logotipo_mobile.jpg"
 import Anchor from './Anchor';
 import { LINKS_HEADER } from '../utils/links';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faRightFromBracket} from '@fortawesome/free-solid-svg-icons'
-
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Header = () => {
   return (
-    <header className='flex'>
-      <nav className='flex items-center flex-wrap'>
-        <img src={logotipo} alt="logo" className='w-[150px] h-[80px]'/>
-        <div className='flex md:gap-16 gap-2 grow justify-center flex-wrap' >
+    <header className='flex w-full'>
+      <nav className='flex items-center p-2 grow'>
+        <img src={logoMobile} alt="logo" className='w-[40px] h-[45px]' />
+        <div className='flex flex-1 justify-between md:gap-16 px-4 md:justify-center' >
           {/* traigo los links dinamicos */}
           {
-            LINKS_HEADER.map((link)=>{
-              return(<Anchor key={link.href} href={link.name} text={link.name}></Anchor>)
+            LINKS_HEADER.map((link) => {
+              return (<Anchor key={link.href} href={link.name} text={link.name}></Anchor>)
             })
           }
         </div>
-        <div className='w-[175px] text-center'>
-          <FontAwesomeIcon className='text-[30px] text-blue-950' icon={faRightFromBracket}/>
+        <div className='flex items-center'>
+          <Link to={'/login'}><FontAwesomeIcon className='text-[25px] text-blue-950' onClick={ () => localStorage.removeItem("token")} icon={faArrowRightFromBracket} /></Link>
         </div>
       </nav>
 
