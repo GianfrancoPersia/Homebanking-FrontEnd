@@ -45,8 +45,13 @@ const Cards = () => {
 	const handleSubmit = (event => {
 		event.preventDefault()
 		console.log("---------------------------------------")
-		if (selectedCardType == "" || selectedCardColor == "") {
-			alert("Fields are missing")
+		if (!selectedCardType || !selectedCardColor) {
+			Swal({
+                title: 'Error',
+                text: 'Please fill in all fields.',
+                icon: 'error',
+                button: 'OK',
+            });
 		} else {
 			axios.post('/api/clients/current/cards', saveNewCard , 
 			{ headers: {

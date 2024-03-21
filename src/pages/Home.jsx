@@ -23,26 +23,28 @@ const Home = () => {
                     <FontAwesomeIcon icon={faArrowDown} className='text-3xl text-white' />
                 </div>
 
-                <article className='flex flex-col p-5 items-center bg-stone-100 rounded-xl gap-5 w-[250px] h-[140px] text-center justify-center shadow-2xl'>
-                    <p className='text-blue-950 font-medium'>Request up to 3 accounts</p>
-                    <div className='flex gap-2 text-blue-950'>
-                        <FontAwesomeIcon icon={faUser} className='text-xl' />
-                        <FontAwesomeIcon icon={faUser} className='text-xl' />
-                        <FontAwesomeIcon icon={faUser} className='text-xl' />
-                    </div>
-                </article>
+                <div className='flex flex-col gap-8 md:flex-row'>        
+                    <article className='flex flex-col p-5 items-center bg-stone-100 rounded-xl gap-5 w-[250px] h-[140px] text-center justify-center shadow-2xl'>
+                        <p className='text-blue-950 font-medium'>Request up to 3 accounts</p>
+                        <div className='flex gap-2 text-blue-950'>
+                            <FontAwesomeIcon icon={faUser} className='text-xl' />
+                            <FontAwesomeIcon icon={faUser} className='text-xl' />
+                            <FontAwesomeIcon icon={faUser} className='text-xl' />
+                        </div>
+                    </article>
 
 
-                <article className='flex flex-col p-5 items-center bg-stone-100 rounded-xl gap-5 w-[250px] h-[140px] text-center shadow-2xl'>
-                    <p className='text-blue-950  font-medium'>Request SILVER, GOLD and TITANIUM cards</p>
-                    <FontAwesomeIcon icon={faCreditCard} className='text-3xl' />
-                </article>
+                    <article className='flex flex-col p-5 items-center bg-stone-100 rounded-xl gap-5 w-[250px] h-[140px] text-center shadow-2xl'>
+                        <p className='text-blue-950  font-medium'>Request SILVER, GOLD and TITANIUM cards</p>
+                        <FontAwesomeIcon icon={faCreditCard} className='text-3xl' />
+                    </article>
 
 
-                <article className='flex flex-col p-5 items-center bg-stone-100 rounded-xl gap-5 w-[250px] h-[140px] text-center shadow-2xl'>
-                    <p className='text-blue-950  font-medium'>Apply for Mortgage, Personal and Auto loans</p>
-                    <FontAwesomeIcon icon={faLandmark} className='text-3xl' />
-                </article>
+                    <article className='flex flex-col p-5 items-center bg-stone-100 rounded-xl gap-5 w-[250px] h-[140px] text-center shadow-2xl'>
+                        <p className='text-blue-950  font-medium'>Apply for Mortgage, Personal and Auto loans</p>
+                        <FontAwesomeIcon icon={faLandmark} className='text-3xl' />
+                    </article>
+                </div>
 
 
             </section>

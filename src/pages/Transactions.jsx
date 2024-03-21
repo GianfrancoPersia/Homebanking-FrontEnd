@@ -10,11 +10,17 @@ const Transactions = () => {
 
     const [transactions, setTransactions] = useState([])
 
-    const [selectedAccount, setSelectedAccount] = useState("")
-    const [amountInput, setAmountInput] = useState("")
-    const [descriptionInput, setDescriptionInput] = useState("")
-    const [destinationInput, setDestinationInput] = useState("")
+    const [selectedAccount, setSelectedAccount] = useState('')
+    const [amountInput, setAmountInput] = useState('')
+    const [descriptionInput, setDescriptionInput] = useState('')
+    const [destinationInput, setDestinationInput] = useState('')
     const [newTransaction, setNewTransaction] = useState({ amount: "", description: "", numberCredit: "", numberDebit: "" })
+
+
+    const [amountValidation, setAmountValidation] = useState(false)
+    const [detinationValidation, setDetinationValidation] = useState(false)
+    const [amountValidationNegative, setAmountValidationNegative] = useState(false)
+
 
     const user = useSelector(store => store.authReducer.user)
     console.log(user)
@@ -22,6 +28,7 @@ const Transactions = () => {
 
     const { login, current } = authActions
     const dispatch = useDispatch()
+
 
     const handleAccountChange = (event) => {
         const selectedAccount = event.target.value
@@ -48,17 +55,28 @@ const Transactions = () => {
 
     }
 
+
+
     const handleSubmit = (event => {
         event.preventDefault()
+        const selectedAccountObj = user.accounts.find(account => account.number === selectedAccount);
+
         console.log("---------------------------------------")
-        if (amountInput == "" || descriptionInput == "" || destinationInput == "" || selectedAccount == "") {
-            alert("Fields are missing")
+        if (!amountInput || !descriptionInput || !destinationInput || !selectedAccount) {
+            // Mostrar un mensaje de error si algún campo está vacío
+            Swal({
+                title: 'Error',
+                text: 'Please fill in all fields.',
+                icon: 'error',
+                button: 'OK',
+            });
+            return; // Salir de la función para evitar que se ejecute el resto del código
         } else if (amountInput <= 0) {
-            alert("Amount cannot be negative")
+            setAmountValidationNegative(true)
         } else if (destinationInput == selectedAccount) {
-            alert("You cannot transfer money to the same account")
-        } else if (selectedAccount.balance < amountInput) {
-            alert("Insufficient funds")
+            setDetinationValidation(true)
+        } else if (selectedAccountObj.balance < amountInput) {
+            setAmountValidation(true)
         }
         else {
             axios.post('/api/clients/current/transactions', newTransaction,
@@ -79,12 +97,12 @@ const Transactions = () => {
                                 Authorization: "Bearer " + localStorage.getItem("token")
                             }
                         })
-                        .then(res => {
-                            dispatch(current(res.data));
-                        })
-                        .catch(err => console.log(err));
+                            .then(res => {
+                                dispatch(current(res.data));
+                            })
+                            .catch(err => console.log(err));
                     });
-                                
+
                 })
                 .catch(err => {
                     console.log(err.response.data)
@@ -111,6 +129,7 @@ const Transactions = () => {
     }, [])
 
     console.log(newTransaction)
+
     return (
         <main className=' bg-blue-900 flex flex-col items-center py-8 min-h-dvh'>
             <article className='w-full flex flex-col items-center'>
@@ -120,19 +139,19 @@ const Transactions = () => {
                     <div className='flex flex-col w-full'>
                         <label className='text-white'>Amount:</label>
                         <input value={amountInput} type="text" name="amount" onInput={handleInputAmount} className='p-2 rounded-lg' />
-                        {/* {amountValidation && <p className='text-red-500'>Incomplete amount field</p>} */}
+                        {amountValidation && <p className='text-red-500'>Insufficient balance</p>}
+                        {amountValidationNegative && <p className='text-red-500'>Amount must be positive</p>}
                     </div>
 
                     <div className='flex flex-col w-full'>
                         <label className='text-white'>Description:</label>
                         <input value={descriptionInput} type="text" name="description" onInput={handleInputDescription} className='p-2 rounded-lg' />
-                        {/* {lastNameValidation && <p className='text-red-500'>Incomplete description field</p>} */}
                     </div>
 
                     <div className='flex flex-col w-full'>
                         <label className='text-white'>Destination account number:</label>
                         <input value={destinationInput} type="text" name="numberCredit" onInput={handleDestinationInput} className='p-2 rounded-lg' />
-                        {/* {emailValidation && <p className='text-red-500'>Destination account field incomplete</p>} */}
+                        {detinationValidation && <p className='text-red-500'>You cannot transfer money to the same account</p>}
 
                     </div>
 
@@ -144,7 +163,7 @@ const Transactions = () => {
                                 <option key={accounts.id} value={accounts.number}>{accounts.number}</option>
                             ))}
                         </select>
-                        {/* {passwordValidation && <p className='text-red-500'>Source account field incomplete</p>} */}
+                        {/* {accountOriginValidation && <p className='text-red-500'>Source account field incomplete</p>} */}
                     </div>
 
 

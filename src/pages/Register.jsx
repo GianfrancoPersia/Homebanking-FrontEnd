@@ -79,7 +79,7 @@ const Register = () => {
 
 
     return (
-        <main className=' bg-blue-900 flex flex-col items-center py-8'>
+        <main className=' bg-blue-900 flex flex-col items-center py-8 min-h-dvh'>
             <article className='w-full flex flex-col items-center'>
                 <h1 className='bg-blue-900 w-full text-2xl text-center text-white font-semibold pb-6'></h1>
 

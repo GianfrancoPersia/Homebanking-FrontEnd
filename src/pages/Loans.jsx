@@ -78,8 +78,13 @@ const Loans = () => {
 	const handleSubmit = (event => {
 		event.preventDefault()
 		console.log("---------------------------------------")
-		if (selectedAccount == "" || selectedPayment == "" || selectedPayment == "") {
-			alert("Fields are missing")
+		if (!selectedAccount || !selectedPayment || !selectedPayment) {
+			Swal({
+                title: 'Error',
+                text: 'Please fill in all fields.',
+                icon: 'error',
+                button: 'OK',
+            });
 		} else {
 			axios.post('/api/clients/current/loans', saveSelection,
 				{

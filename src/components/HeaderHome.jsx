@@ -9,10 +9,10 @@ import { Link, useNavigate } from 'react-router-dom'
 
 const Header = () => {
     return (
-        <header className='flex w-full'>
+        <header className='flex w-full md:px-4'>
           <nav className='flex items-center p-2 grow justify-between'>
             <img src={logoMobile} alt="logo" className='w-[40px] h-[45px]' />
-            <div className='flex gap-5' >
+            <div className='flex gap-6' >
               {/* traigo los links dinamicos */}
               {
                 LINKS_NO_AUTH.map((link) => {
